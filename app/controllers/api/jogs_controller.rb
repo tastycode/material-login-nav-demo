@@ -10,6 +10,11 @@ class Api::JogsController < Api::BaseController
     end
   end
 
+  def index
+    jogs = current_user.jogs
+    render json: jogs
+  end
+
   protected
 
   def jog_params
