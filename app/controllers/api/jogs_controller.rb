@@ -10,6 +10,17 @@ class Api::JogsController < Api::BaseController
     end
   end
 
+  def update
+    jog = Jog.find_by(id: params[:id], user: current_user)
+    jog.assign_attributes(jog_params)
+    if jog.valid?
+      jog.save
+      render json: jog
+    else
+      respond_with_errors(jog)
+    end
+  end
+
   def index
     jogs = current_user.jogs
     render json: jogs
