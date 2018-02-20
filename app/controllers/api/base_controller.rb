@@ -24,6 +24,12 @@ class Api::BaseController < ApplicationController
     render json: errors, status: :unauthorized
   end
 
+  def respond_with_errors(object)
+    errors = ErrorSerializer.serialize(object)
+
+    render json: { errors: errors }, status: :unprocessable_entity
+  end
+
   private
 
   def authenticate_token
