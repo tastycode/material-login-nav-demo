@@ -21,6 +21,11 @@ class Api::JogsController < Api::BaseController
     end
   end
 
+  def show
+    jog = Jog.find_by(id: params[:id], user: current_user)
+    render json: jog
+  end
+
   def index
     jogs = current_user.jogs
     render json: jogs
