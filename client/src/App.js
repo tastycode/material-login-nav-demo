@@ -6,6 +6,8 @@ import { AppBar, Drawer, MenuItem } from "material-ui"
 import styled from "styled-components"
 import baseStyles from "./baseStyles"
 
+import Register from "./components/Register"
+
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
 const CollapsibleContainer = styled.div`
   margin-left: auto;
@@ -14,6 +16,7 @@ const CollapsibleContainer = styled.div`
 
   right: 0;
   left: ${props => (props.collapsed ? "250px" : "0")} !important;
+  height: 100%;
   transition: 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
   $:after {
     content: "";
@@ -62,7 +65,7 @@ class App extends Component {
             onLeftIconButtonClick={this._handleHamburgerClick}
           />
           <Route exact path="/" component={() => <div>home</div>} />
-          <Route path="/register" component={() => <div>register</div>} />
+          <Route path="/register" component={Register} />
           <Route path="/login" component={() => <div>login</div>} />
         </CollapsibleContainer>
       </MuiThemeProvider>
