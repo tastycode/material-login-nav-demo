@@ -1,9 +1,13 @@
 import React, { Component } from "react"
+import { connect } from "react-redux"
+import * as R from "ramda"
 
-import { Route, Link } from "react-router-dom"
+import { Route, Link, withRouter } from "react-router-dom"
 
 import { AppBar, Drawer, MenuItem } from "material-ui"
 import styled from "styled-components"
+
+import * as authActions from "actions/auth"
 import baseStyles from "./baseStyles"
 
 import Register from "./components/Register"
@@ -36,7 +40,15 @@ class App extends Component {
     console.log("drawer clicked")
     this.setState({ open: false })
   }
+  _handleLogout = () => {
+    this.props.dispatch(authActions.logout(this.props.history))
+    this.setState({ open: false })
+  }
+
   render() {
+    let loggedIn = !!R.path(["auth", "token"])(this.props)
+    let email = loggedIn && this.props.auth.email
+
     const DrawerItem = ({ label, path }) => {
       const MenuLink = styled(Link)`
         text-decoration: none;
@@ -47,6 +59,9 @@ class App extends Component {
         </MenuLink>
       )
     }
+
+    const loggedInBanner = <div>Logged in as {email}</div>
+
     baseStyles()
     return (
       <MuiThemeProvider>
@@ -56,9 +71,13 @@ class App extends Component {
             open={this.state.open}
             onClick={this._handleDrawerClick}
           >
+            {loggedIn && loggedInBanner}
             <DrawerItem path="/" label="Home" />
-            <DrawerItem path="/login" label="Login" />
-            <DrawerItem path="/register" label="Register" />
+            {!loggedIn && <DrawerItem path="/login" label="Login" />}
+            {!loggedIn && <DrawerItem path="/register" label="Register" />}
+            {loggedIn && (
+              <MenuItem onClick={this._handleLogout}>Logout</MenuItem>
+            )}
           </Drawer>
           <AppBar
             title="Topmiles"
@@ -73,4 +92,8 @@ class App extends Component {
   }
 }
 
-export default App
+const mapStateToProps = state => ({
+  auth: state.auth,
+})
+
+export default R.pipe(connect(mapStateToProps), withRouter)(App)
