@@ -21,4 +21,10 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* ...
+## Client
+
+### Running the client for local development
+
+- `cd client`
+- `docker container run -it -p 3000:3000 -p 35729:35729 -v $(pwd):/app react:app`
+
