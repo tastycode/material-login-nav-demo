@@ -14,6 +14,13 @@ TopmilesClient.auth = {
     })
     return response.data
   },
+  login: async ({ email, password }) => {
+    const response = await axios.post(urlFor(`/login.json`), {
+      email,
+      password,
+    })
+    return response.data
+  },
 }
 
 export default TopmilesClient

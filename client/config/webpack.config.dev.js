@@ -147,7 +147,10 @@ module.exports = {
               plugins: [
                 [
                   "module-alias", [
-                      { "src": "./src/reducers", "expose": "reducers"}
+                      { "src": "./src/reducers", "expose": "reducers"},
+                      { "src": "./src/services", "expose": "services"},
+                      { "src": "./src/actions", "expose": "actions"},
+                      { "src": "./src/ui", "expose": "ui"}
                   ]
                 ]
               ],

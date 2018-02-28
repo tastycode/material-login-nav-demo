@@ -11,6 +11,7 @@ export default function auth(state = initialState.auth, action) {
       return newState
     case AUTH_LOGOUT:
       newState = {}
+      localStorage.clear()
       return newState
     default:
       return state

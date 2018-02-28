@@ -11,6 +11,7 @@ import * as authActions from "actions/auth"
 import baseStyles from "./baseStyles"
 
 import Register from "./components/Register"
+import Login from "./components/Login"
 
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
 const CollapsibleContainer = styled.div`
@@ -85,7 +86,7 @@ class App extends Component {
           />
           <Route exact path="/" component={() => <div>home</div>} />
           <Route path="/register" component={Register} />
-          <Route path="/login" component={() => <div>login</div>} />
+          <Route path="/login" component={Login} />
         </CollapsibleContainer>
       </MuiThemeProvider>
     )
