@@ -7,18 +7,18 @@ import * as authActions from "actions/auth"
 import { withRouter } from "react-router-dom"
 import { renderTextField, Form, FormHeading, CenteredContainer } from "ui/forms"
 
-const Register = props => {
+const Login = props => {
   const { history, dispatch, handleSubmit, pristine, reset, submitting } = props
 
-  const register = ({ email, password }) => {
-    dispatch(authActions.register({ email, password, history }))
+  const login = ({ email, password }) => {
+    dispatch(authActions.login({ email, password, history }))
   }
 
   return (
     <CenteredContainer>
-      <Paper zDepth={1} rounded={false}>
-        <Form onSubmit={handleSubmit(register)}>
-          <FormHeading>Register</FormHeading>
+      <Paper zDepth={2} rounded={false}>
+        <Form onSubmit={handleSubmit(login)}>
+          <FormHeading>Login</FormHeading>
           <Field name="email" component={renderTextField} label="E-Mail" />
           <Field
             name="password"
@@ -42,6 +42,6 @@ export default R.pipe(
   withRouter,
   connect(),
   reduxForm({
-    form: "register",
+    form: "login",
   }),
-)(Register)
+)(Login)

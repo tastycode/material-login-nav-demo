@@ -12,6 +12,7 @@ import baseStyles from "./baseStyles"
 
 import Register from "./components/Register"
 import Login from "./components/Login"
+import DrawerHeader from "./DrawerHeader"
 
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"
 const CollapsibleContainer = styled.div`
@@ -61,8 +62,6 @@ class App extends Component {
       )
     }
 
-    const loggedInBanner = <div>Logged in as {email}</div>
-
     baseStyles()
     return (
       <MuiThemeProvider>
@@ -72,7 +71,7 @@ class App extends Component {
             open={this.state.open}
             onClick={this._handleDrawerClick}
           >
-            {loggedIn && loggedInBanner}
+            <DrawerHeader />
             <DrawerItem path="/" label="Home" />
             {!loggedIn && <DrawerItem path="/login" label="Login" />}
             {!loggedIn && <DrawerItem path="/register" label="Register" />}
