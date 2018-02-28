@@ -7,6 +7,7 @@ export default function auth(state = initialState.auth, action) {
     case AUTH_SUCCESS:
       newState.token = action.token
       newState.email = action.email
+      localStorage.setItem("auth", JSON.stringify(newState))
       return newState
     case AUTH_LOGOUT:
       newState = {}
